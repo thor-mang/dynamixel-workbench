@@ -88,7 +88,7 @@ class QNode : public QThread
   void sendRebootMsg(void);
   void sendResetMsg(void);
   void sendSetIdMsg(int64_t id);
-  void sendSetOperatingModeMsg(std::__cxx11::string index);
+  void sendSetOperatingModeMsg(std::string index);
   void sendSetBaudrateMsg(float baud_rate);
   void sendControlTableValueMsg(QString table_item, int64_t value);
   void setPositionZeroMsg(int32_t zero_position);
