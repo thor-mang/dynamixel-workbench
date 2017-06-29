@@ -1,8 +1,8 @@
 <launch>
-  <node name="single_manager_tutorial" pkg="dynamixel_workbench_single_manager" type="dynamixel_workbench_single_manager" required="true" output="screen">
-    <rosparam>
-      device_name_: "/dev/ttyUSB0"
-      baud_rate_: 57600
-    </rosparam>
-  </node>
+  <rosparam>
+    device_name: "/dev/ttyUSB0"
+    baud_rate: 57600
+  </rosparam>
+  <node name="dynamixel_workbench_single_manager" pkg="dynamixel_workbench_single_manager" type="dynamixel_workbench_single_manager" required="true" output="screen"  />
 </launch>
+

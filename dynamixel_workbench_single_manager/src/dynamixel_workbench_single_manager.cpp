@@ -101,8 +101,11 @@ bool DynamixelWorkbenchSingleManager::initDynamixelWorkbenchSingleManager(void)
 
 bool DynamixelWorkbenchSingleManager::shutdownDynamixelWorkbenchSingleManager(void)
 {
-  dynamixel_->item_ = dynamixel_->ctrl_table_["torque_enable"];
-  writeDynamixelRegister(dynamixel_->id_, dynamixel_->item_->address, dynamixel_->item_->data_length, false);
+  if(dynamixel_ != NULL)
+  {
+    dynamixel_->item_ = dynamixel_->ctrl_table_["torque_enable"];
+    writeDynamixelRegister(dynamixel_->id_, dynamixel_->item_->address, dynamixel_->item_->data_length, false);
+  }
   portHandler_->closePort();
   ros::shutdown();
   return true;
@@ -153,6 +156,10 @@ int DynamixelWorkbenchSingleManager::kbhit(void)
 
 void DynamixelWorkbenchSingleManager::setPublisher(void)
 {
+  if(dynamixel_ == NULL)
+  {
+     return;
+  }
   // Init ROS publish
   if(!strncmp(dynamixel_->model_name_.c_str(), "AX", 2))
   {
@@ -1964,7 +1971,6 @@ int main(int argc, char **argv)
   DynamixelWorkbenchSingleManager manager;
   ros::Rate loop_rate(10);
   manager.viewManagerMenu();
-
   while (ros::ok())
   {
     manager.dynamixelSingleManagerLoop();
